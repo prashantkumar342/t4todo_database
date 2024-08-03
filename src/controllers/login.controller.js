@@ -29,7 +29,8 @@ const login = async (req, res) => {
       await token.save();
       return res.status(200).cookie('refreshToken', refreshToken, {
         httpOnly: true,
-        secure: true,
+        secure: process.env.NODE_ENV === 'production',
+        sameSite: "None",
         maxAge: 864000000
       }).json({ success: 'successfull loggedIn' })
     }
@@ -37,7 +38,8 @@ const login = async (req, res) => {
     await existingToken.save();
     res.status(200).cookie('refreshToken', refreshToken, {
       httpOnly: true,
-      secure: true,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: "None",
       maxAge: 864000000
     }).json({ success: 'successfull loggedIn' })
   }
