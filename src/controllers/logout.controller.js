@@ -4,7 +4,7 @@ const logout = async (req, res) => {
   res.clearCookie('refreshToken', {
     httpOnly: true,
     secure: true,
-    path: '/'
+    // path: '/'
   })
   await tokenModel.findByIdAndDelete(req.tokenId._id)
   res.status(200).json({ message: "succefully logged out" })
